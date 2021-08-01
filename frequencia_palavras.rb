@@ -1,5 +1,14 @@
+class Palavra
+  attr_accessor :palavra, :frequencia
+
+  def initialize(palavra, frequencia)
+    @palavra = palavra
+    @frequencia = frequencia
+  end
+end
+
 class AnalisadorLinha
-    attr_accessor :numero_linha,:conteudo_linha
+    attr_accessor :numero_linha, :conteudo_linha, :palavra_frequente
     def initialize (numero_linha, conteudo_linha)
         @numero_linha = numero_linha
         @conteudo_linha=conteudo_linha
@@ -23,7 +32,8 @@ class AnalisadorLinha
         big = 0
         hash.each { |key, value|
           if value >= big
-            @palavra_frequente.push(key)
+            palavra = Palavra.new(key, value)
+            @palavra_frequente.push(palavra)
             big = value
           else
             break
@@ -47,10 +57,18 @@ class AnalisadorLinha
 end
 
 f = File.read("texto.txt")
+analisador_arr = Array.new{0}
 linhas = f.split("\n")
 linhas.each_with_index {|linha, index|
     palavras = linha.split(" ")
     ob = AnalisadorLinha.new(index+1,palavras)
     ob.contar()
-    puts ob.to_str
+    analisador_arr.push(ob)
+}
+
+analisador_arr.each { |item|
+  item.palavra_frequente.each { |palavra|
+    puts "Palavra: #{palavra.palavra}\nFrequencia: #{palavra.frequencia}\nLinha: #{item.numero_linha}"
+    puts "================="
+  }
 }
