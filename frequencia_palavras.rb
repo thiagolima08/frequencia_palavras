@@ -47,8 +47,7 @@ end
 
 f = File.read("texto.txt")
 linhas = f.split("\n")
-linhas.each_index {|index|
-    linha = linhas[index]
+linhas.each_with_index {|linha, index|
     palavras = linha.split(" ")
     ob = AnalisadorLinha.new(index+1,palavras)
     ob.contar()
