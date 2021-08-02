@@ -1,3 +1,2 @@
 # frequencia_palavras
-Grupo: Danilo Marques
-       Thiago Lima
+Grupo: Danilo Marques e Thiago Lima
